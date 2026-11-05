@@ -1,0 +1,57 @@
+/* Spatial glassmorphism countdown UI */
+.countdown-layout { position: relative; isolation: isolate; }
+.countdown-layout::before, .countdown-layout::after {
+  content: ""; position: absolute; z-index: -1; width: 220px; height: 220px;
+  border-radius: 50%; filter: blur(65px); opacity: .45; pointer-events: none;
+}
+.countdown-layout::before { top: 12%; left: 4%; background: #efb8df; }
+.countdown-layout::after { right: 3%; bottom: 4%; background: #bdb2f4; }
+.countdown-layout .timer {
+  display: flex; justify-content: center; gap: 14px; perspective: 1000px;
+  margin: 34px auto; width: min(100%, 560px);
+}
+.countdown-layout .timebox {
+  position: relative; flex: 1; min-width: 0; padding: 22px 12px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.72); border-radius: 23px;
+  background: linear-gradient(145deg,rgba(255,255,255,.68),rgba(245,224,255,.3));
+  backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+  box-shadow: 0 16px 38px rgba(130,91,165,.14),inset 0 1px 1px rgba(255,255,255,.9);
+  transform: rotateX(5deg); transition: .35s ease;
+}
+.countdown-layout .timebox:hover { transform: translateY(-8px) rotateX(0) scale(1.035); box-shadow: 0 24px 48px rgba(155,112,183,.23); }
+.countdown-layout .timebox strong { display:block; color:#875e99; font-size:clamp(1.8rem,5vw,3rem); line-height:1.1; text-shadow:0 4px 18px rgba(205,157,218,.35); }
+.countdown-layout .timebox span { display:block; margin-top:8px; color:#967ba1; font-size:.7rem; letter-spacing:1.5px; text-transform:uppercase; }
+.countdown-layout .password-card {
+  position:relative; box-sizing:border-box; width:min(440px,92%); margin:32px auto; padding:34px 28px;
+  overflow:hidden; border:1px solid rgba(255,255,255,.78); border-radius:30px;
+  background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(239,220,255,.38));
+  backdrop-filter:blur(26px); -webkit-backdrop-filter:blur(26px);
+  box-shadow:0 26px 65px rgba(140,100,170,.18),inset 0 1px 2px rgba(255,255,255,.95);
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.countdown-layout .password-card:hover { transform:translateY(-5px); box-shadow:0 32px 72px rgba(160,115,190,.24); }
+.countdown-layout .lock-orbit {
+  display:grid; place-items:center; width:66px; height:66px; margin:0 auto 18px;
+  border:1px solid rgba(255,255,255,.9); border-radius:50%; color:#9b6eaa;
+  background:linear-gradient(145deg,#fff,#f3dff5); box-shadow:0 10px 30px rgba(180,130,190,.26);
+  animation:countdownLockFloat 3s ease-in-out infinite;
+}
+@keyframes countdownLockFloat { 0%,100%{transform:translateY(0) rotate(-4deg)} 50%{transform:translateY(-7px) rotate(4deg)} }
+.countdown-layout .password-card input {
+  display:block; position:relative; box-sizing:border-box; width:100%; margin:18px 0 14px; padding:15px 17px;
+  border:1px solid rgba(190,150,200,.4); border-radius:15px; outline:none; color:#75577f;
+  background:rgba(255,255,255,.75); transition:border-color .25s ease,box-shadow .25s ease;
+}
+.countdown-layout .password-card input:focus { border-color:#c58bc8; box-shadow:0 0 0 4px rgba(205,150,210,.16); }
+.countdown-layout .password-card .button { width:100%; justify-content:center; }
+.countdown-layout .password-error { display:block; margin-top:12px; color:#c45c83; }
+.countdown-layout .waiting-pill { display:flex; align-items:center; justify-content:center; gap:8px; margin:18px 0; padding:13px; border:1px solid rgba(180,140,200,.25); border-radius:15px; color:#815b91; background:rgba(255,255,255,.62); }
+.chapter-locked { display:inline-flex; align-items:center; justify-content:center; gap:7px; color:#9a7ba5; font-size:.78rem; text-align:center; }
+@media(max-width:600px) {
+  .countdown-layout .timer { gap:7px; }
+  .countdown-layout .timebox { padding:17px 5px; border-radius:16px; }
+  .countdown-layout .timebox strong { font-size:1.65rem; }
+  .countdown-layout .timebox span { font-size:.55rem; letter-spacing:.7px; }
+  .countdown-layout .password-card { padding:27px 19px; }
+  .chapter-locked { max-width:120px; font-size:.62rem; }
+}
